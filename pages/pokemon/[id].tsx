@@ -120,7 +120,7 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
       params: { id },
     })),
     // fallback: false,
-    fallback: "blocking",
+    fallback: "blocking", // Incremental Static Generation (ISG)
   };
 };
 
@@ -131,6 +131,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const pokemon = await getPokemonInfo(id);
 
+  // Validation for Incremental Static Generation (ISG)
   if (!pokemon) {
     return {
       redirect: {
@@ -144,6 +145,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       pokemon,
     },
+    // Incremental Static Regeneration (ISR)
     revalidate: 86400, // 60 * 60 * 24
   };
 };
